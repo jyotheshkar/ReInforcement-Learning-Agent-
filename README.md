@@ -1,28 +1,35 @@
-Zombie Hunter with Reinforcement Learning
-Description
-Zombie Hunter with Reinforcement Learning is a Python-based game that combines AI-powered gameplay with classic zombie-shooting action. The AI agent, controlled by a Deep Q-Network (DQN), learns to survive, shoot zombies, and progress through levels while maintaining its health and avoiding dangers. The game features reinforcement learning mechanics, dynamically spawning zombies, and a visually appealing interface using Pygame.
+# Zombie Hunter with Reinforcement Learning
 
-Features
-AI-Powered Gameplay: The AI agent learns optimal strategies using reinforcement learning.
-Levels and Progression: Gradual difficulty increases with zombies starting from level 1 (25 zombies) to level 5 (300 zombies).
-Dynamic Actions: AI can move, shoot, and avoid zombies dynamically.
-Health and Damage Mechanics: AI health depletes if hit by zombies or if stationary for too long.
-Blinking Animation: Visual feedback for damage events.
-Sound Effects: Optional sound effects for shooting, taking damage, zombie deaths, and level progression.
-Technologies Used
-Python: Main programming language.
-Pygame: For game visuals and mechanics.
-PyTorch: For implementing the Deep Q-Network (DQN).
-NumPy: For numerical operations.
-Random: For spawning zombies at random locations.
-Math: For calculating distances and angles.
-Installation
-Clone the Repository:
-bash
-Copy
-Edit
-git clone https://github.com/your-username/zombie-hunter-rl.git
-cd zombie-hunter-rl
+## Description
+**Zombie Hunter with Reinforcement Learning** is a Python-based game that combines AI-powered gameplay with classic zombie-shooting action. The AI agent, controlled by a Deep Q-Network (DQN), learns to survive, shoot zombies, and progress through levels while maintaining its health and avoiding dangers. The game features reinforcement learning mechanics, dynamically spawning zombies, and a visually appealing interface using **Pygame**.
+
+---
+
+## Features
+- **AI-Powered Gameplay**: The AI agent learns optimal strategies using reinforcement learning.
+- **Levels and Progression**: Gradual difficulty increases with zombies starting from level 1 (25 zombies) to level 5 (300 zombies).
+- **Dynamic Actions**: AI can move, shoot, and avoid zombies dynamically.
+- **Health and Damage Mechanics**: AI health depletes if hit by zombies or if stationary for too long.
+- **Blinking Animation**: Visual feedback for damage events.
+- **Sound Effects**: Optional sound effects for shooting, taking damage, zombie deaths, and level progression.
+
+---
+
+## Technologies Used
+- **Python**: Main programming language.
+- **Pygame**: For game visuals and mechanics.
+- **PyTorch**: For implementing the Deep Q-Network (DQN).
+- **NumPy**: For numerical operations.
+- **Random**: For spawning zombies at random locations.
+- **Math**: For calculating distances and angles.
+
+---
+
+## Installation
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/your-username/zombie-hunter-rl.git
+   cd zombie-hunter-rl
 Install Dependencies: Ensure you have Python installed. Then install the required libraries:
 bash
 Copy
