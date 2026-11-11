@@ -1,5 +1,10 @@
 # Zombie Hunter with Reinforcement Learning
 
+## Architecture and maintenance
+
+[Technical architecture, source boundaries, scalability decisions and verification](docs/ARCHITECTURE_MAINTENANCE.md) documents the current implementation and its limits. Maintenance dated 11 November 2026 is separate from the original study or project work.
+
+
 ## Description
 **Zombie Hunter with Reinforcement Learning** is a Python-based game that combines AI-powered gameplay with classic zombie-shooting action. The AI agent, controlled by a Deep Q-Network (DQN), learns to survive, shoot zombies, and progress through levels while maintaining its health and avoiding dangers. The game features reinforcement learning mechanics, dynamically spawning zombies, and a visually appealing interface using **Pygame**.
 
