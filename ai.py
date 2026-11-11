@@ -9,7 +9,10 @@ import torch.optim as optim
 from collections import deque
 
 pygame.init()
-pygame.mixer.init()
+try:
+    pygame.mixer.init()
+except pygame.error:
+    pass  # Silent play remains available on machines without an audio device.
 
 # Attempt to load sound effects; if not found, set them to None
 shoot_sound = None
@@ -17,13 +20,13 @@ hit_sound = None
 zombie_death_sound = None
 level_up_sound = None
 
-if os.path.isfile("shoot.wav"):
+if pygame.mixer.get_init() and os.path.isfile("shoot.wav"):
     shoot_sound = pygame.mixer.Sound("shoot.wav")
-if os.path.isfile("hit.wav"):
+if pygame.mixer.get_init() and os.path.isfile("hit.wav"):
     hit_sound = pygame.mixer.Sound("hit.wav")
-if os.path.isfile("zombie_death.wav"):
+if pygame.mixer.get_init() and os.path.isfile("zombie_death.wav"):
     zombie_death_sound = pygame.mixer.Sound("zombie_death.wav")
-if os.path.isfile("level_up.wav"):
+if pygame.mixer.get_init() and os.path.isfile("level_up.wav"):
     level_up_sound = pygame.mixer.Sound("level_up.wav")
 
 # User requested screen size: 1000 x 800
@@ -224,7 +227,8 @@ class AISaviorRL:
         if random.random()<self.epsilon:
             return random.randint(0,ACTION_SPACE-1)
         s=torch.FloatTensor(state).unsqueeze(0).to(device)
-        q=self.q_network(s)
+        with torch.no_grad():
+            q=self.q_network(s)
         return torch.argmax(q).item()
 
     def take_action(self,action,zo):
@@ -399,23 +403,8 @@ while running:
             continue
 
     done=ai_savior.health<=0
-    if done:
-        ai_savior.reset()
-        ai_savior.level=1
-        zombies = start_level(ai_savior.level)
-
-    if len(zombies)==0 and not done:
-        if ai_savior.level<5:
-            ai_savior.advance_level()
-            zombies = start_level(ai_savior.level)
-        else:
-            ai_savior.advance_level()
-            ai_savior.reset()
-            ai_savior.level=1
-            zombies = start_level(ai_savior.level)
-
     nst=ai_savior.get_state(zombies)
-    rew=-1 if ai_savior.health>0 else -100
+    rew=-100 if done else -1
     distc=math.sqrt((ai_savior.x - CENTER_X)**2+(ai_savior.y - CENTER_Y)**2)
     if distc>CENTER_RADIUS:
         rew+=0.5
@@ -432,6 +421,22 @@ while running:
 
     ai_savior.replay_buffer.add((st,act,rew,nst,done))
     ai_savior.train()
+
+    if done:
+        ai_savior.reset()
+        ai_savior.level=1
+        zombies = start_level(ai_savior.level)
+
+    if len(zombies)==0 and not done:
+        if ai_savior.level<5:
+            ai_savior.advance_level()
+            zombies = start_level(ai_savior.level)
+        else:
+            ai_savior.advance_level()
+            ai_savior.reset()
+            ai_savior.level=1
+            zombies = start_level(ai_savior.level)
+
 
     screen.fill(BLACK)
     for zz in zombies:
