@@ -102,3 +102,5 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 Acknowledgments
 Inspired by classic arcade zombie games.
 Special thanks to the open-source community for providing tools like Pygame and PyTorch.
+
+**Year provenance:** The `2025` suffix records this repository's creation year (created 2025-01-27). Later maintenance retains its own dates.
